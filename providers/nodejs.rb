@@ -32,7 +32,7 @@ action :before_deploy do
   r = new_resource
   unless r.restart_command
     r.restart_command do
-      poise_service "#{service_name}_nodejs" do
+      poise_service "#{node['service_name']}_nodejs" do
         action [:enable, :restart]
       end
     end
@@ -43,7 +43,7 @@ action :before_deploy do
 end
 
 action :before_migrate do
-  nodejs_npm service_name do
+  nodejs_npm node['service_name'] do
     path new_resource.release_path
     json true
     user new_resource.owner
@@ -62,7 +62,7 @@ action :before_restart do
 
   poise_service_user new_resource.owner
 
-  poise_service "app_nodejs" do
+  poise_service node['service_name'] do
     user new_resource.owner
     group new_resource.group
     command "#{node_binary} #{new_resource.entry_point}"
@@ -76,9 +76,9 @@ action :after_restart do
   new_resource.updated_by_last_action(true)
 end
 
-protected
+#protected
 
-def service_name
+#def service_name
  # if new_resource.application.name.nil?
 #    return new_resource.application.name
 #  else
@@ -86,5 +86,5 @@ def service_name
 #  end
 #
 #  'michaelburns'
-node['service_name']
-end
+#node['service_name']
+#end
