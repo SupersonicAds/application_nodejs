@@ -62,7 +62,7 @@ action :before_restart do
 
   poise_service_user new_resource.owner
 
-  poise_service "#{service_name}_nodejs" do
+  poise_service "app_nodejs" do
     user new_resource.owner
     group new_resource.group
     command "#{node_binary} #{new_resource.entry_point}"
