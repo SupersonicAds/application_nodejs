@@ -79,11 +79,12 @@ end
 protected
 
 def service_name
-  if new_resource.application.name.nil?
-    return new_resource.application.name
-  else
-    return new_resource.service_name
-  end
-
-  'michaelburns'
+ # if new_resource.application.name.nil?
+#    return new_resource.application.name
+#  else
+#    return new_resource.service_name
+#  end
+#
+#  'michaelburns'
+node['service_name']
 end
